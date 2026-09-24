@@ -1330,7 +1330,7 @@ def generate_opportunities(df, cols):
             opportunities.append({
                 "opportunity": "Improve Customer Retention",
                 "evidence": f"{one_time:,} customers ({one_time_pct:.1f}%) made only one purchase. Repeat customers ({repeat:,}) generate significantly higher lifetime value. Average revenue from repeat customers is {fmt_currency(cust_df[cust_df['Customer ID'].isin(cust_orders[cust_orders > 1].index)].groupby('Customer ID')['Revenue'].sum().mean())}.",
-                "why_it_matters": "Converting one-time buyers into repeat customers is typically 5-7x more cost-effective than acquiring new customers. Implementing targeted re-engagement campaigns, loyalty programs, or post-purchase follow-ups could significantly increase customer lifetime value."
+                "why_it_matters": "The analysis shows a measurable difference between one-time and repeat-customer behavior. Consider targeted re-engagement campaigns, loyalty programs, or post-purchase follow-ups and evaluate their effect on repeat purchase rate and customer lifetime value."
             })
     
     # Opportunity 5: Peak seasonal planning
@@ -1460,7 +1460,7 @@ def generate_recommended_actions(df, full_df, cols):
         "fact": f"{top_country} contributes {top_country_pct:.1f}% of total revenue ({fmt_currency(country_rev.iloc[0])}). International markets collectively contribute only {100-top_country_pct:.1f}%.",
         "insight": "The business is highly dependent on a single market, creating significant concentration risk.",
         "risk_or_opportunity": f"Top 3 international markets ({', '.join(top_intl.index[:3].tolist())}) already generate {fmt_currency(top_intl.sum())} combined, proving demand exists beyond the domestic market.",
-        "action": f"Develop targeted market entry strategies for the top 3 international markets. Invest in localized marketing, consider local warehousing or fulfillment partnerships to reduce shipping costs, and set a target to increase international revenue share from {100-top_country_pct:.1f}% to at least {min(100-top_country_pct+10, 40):.0f}% within 12 months.",
+        "action": f"Prioritize the top 3 international markets for further validation. Test localized marketing and fulfillment options, then measure whether these initiatives improve international revenue share and customer/order performance before setting a longer-term target.",
         "type": "OPPORTUNITY",
         "icon": "🌍",
         "impact_score": 5,
@@ -1526,7 +1526,7 @@ def generate_recommended_actions(df, full_df, cols):
             "fact": f"{missing_cust_pct:.1f}% of transactions ({(~df['HasCustomerID']).sum():,} records) have no customer identification, representing {fmt_currency(missing_rev)} in untracked revenue.",
             "insight": "Without customer IDs, the business cannot perform accurate customer lifetime value analysis, personalize marketing, or effectively measure retention.",
             "risk_or_opportunity": "Incomplete data limits the ability to make data-driven customer decisions and may result in missed revenue opportunities.",
-            "action": "Implement mandatory customer registration at checkout. Offer incentives (e.g., first-order discount, loyalty points) for account creation. Integrate CRM systems to ensure all transactions are linked to customer profiles. Target reducing unidentified transactions to below 5% within 6 months.",
+            "action": "Improve customer identification at checkout through registration incentives and CRM integration. Track the share of transactions without Customer IDs and set an operational target after establishing a baseline and testing the registration process.",
             "type": "RISK",
             "icon": "📊",
             "impact_score": 4,
@@ -1547,7 +1547,7 @@ def generate_recommended_actions(df, full_df, cols):
             "fact": f"Revenue varies significantly by month: peak month ({peak_month}) generated {fmt_currency(peak_rev)} while the lowest month ({low_month}) generated only {fmt_currency(low_rev)}. Monthly average is {fmt_currency(avg_rev)}.",
             "insight": f"The {((peak_rev/low_rev)):.1f}x difference between peak and low months indicates strong seasonality that can be strategically managed.",
             "risk_or_opportunity": "Proper seasonal planning can maximize revenue during peaks and reduce losses during troughs.",
-            "action": f"Develop a seasonal business calendar: (1) Pre-stock high-demand products 4-6 weeks before {peak_month}, (2) Plan promotional campaigns during historically low months to stimulate demand, (3) Adjust staffing levels to match seasonal patterns, (4) Create seasonal product bundles to increase average order value during peak periods.",
+            "action": f"Develop a seasonal business calendar: (1) review inventory requirements ahead of {peak_month}, (2) test promotional campaigns during historically low months, (3) align staffing with observed demand patterns, and (4) evaluate seasonal bundles for their effect on average order value.",
             "type": "OPPORTUNITY",
             "icon": "📅",
             "impact_score": 4,
