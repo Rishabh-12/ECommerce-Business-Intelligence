@@ -212,7 +212,7 @@ ECommerce-Business-Intelligence/
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/YOUR_USERNAME/ECommerce-Business-Intelligence.git
+git clone https://github.com/Rishabh-12/ECommerce-Business-Intelligence.git
 cd ECommerce-Business-Intelligence
 ```
 
