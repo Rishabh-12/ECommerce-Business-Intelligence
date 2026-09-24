@@ -482,7 +482,7 @@ def main():
         """
         <div style='text-align: center; color: #aaa; font-size: 0.75rem; padding: 0.5rem;'>
             E-Commerce Business Intelligence<br>
-            Rishabh Singh | 2024
+            Rishabh Singh | 2026
         </div>
         """,
         unsafe_allow_html=True
