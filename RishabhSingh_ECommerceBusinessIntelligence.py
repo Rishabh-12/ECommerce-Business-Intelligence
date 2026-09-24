@@ -610,7 +610,8 @@ def page_executive_overview(df, full_df, cols):
             xaxis_title="Month",
             yaxis_title="Quantity",
             height=350
-        )        st.plotly_chart(fig_qty, use_container_width=True)
+        )
+        st.plotly_chart(fig_qty, use_container_width=True)
     
     # Revenue Growth
     st.markdown('<div class="sub-header">📊 Month-over-Month Revenue Growth</div>', unsafe_allow_html=True)
@@ -1008,7 +1009,8 @@ def page_customer_risk(df, full_df, cols):
         col1, col2 = st.columns(2)
         
         with col1:
-            fig_lorenz = go.Figure()            fig_lorenz.add_trace(go.Scatter(
+            fig_lorenz = go.Figure()
+            fig_lorenz.add_trace(go.Scatter(
                 x=customer_revenue_sorted["Customer_Rank_Pct"],
                 y=customer_revenue_sorted["Cumulative_Pct"],
                 mode="lines",
