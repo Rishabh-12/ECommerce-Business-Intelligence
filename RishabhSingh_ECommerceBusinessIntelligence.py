@@ -34,10 +34,14 @@ st.set_page_config(
 # ============================================================
 st.markdown("""
 <style>
+    body {
+        background-color: #ffffff;
+        color: #1f2937;
+    }
     .main-header {
         font-size: 2.2rem;
         font-weight: 700;
-        color: #1a1a2e;
+        color: #111827;
         text-align: center;
         padding: 1rem 0;
         border-bottom: 3px solid #e94560;
@@ -46,7 +50,7 @@ st.markdown("""
     .sub-header {
         font-size: 1.4rem;
         font-weight: 600;
-        color: #16213e;
+        color: #1f2937;
         margin-top: 1.5rem;
         margin-bottom: 0.8rem;
     }
@@ -126,18 +130,29 @@ st.markdown("""
         border-radius: 0 8px 8px 0;
     }
     .stMetric {
-        background-color: #f0f2f6;
+        background-color: #f8fafc;
         padding: 10px;
         border-radius: 10px;
+        border: 1px solid #e5e7eb;
     }
     div[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+        background: #f8fafc;
+        border-right: 1px solid #e5e7eb;
     }
-    div[data-testid="stSidebar"] .stMarkdown {
-        color: white;
-    }
+    div[data-testid="stSidebar"] .stMarkdown,
+    div[data-testid="stSidebar"] .stMarkdown p,
     div[data-testid="stSidebar"] label {
-        color: white !important;
+        color: #111827 !important;
+    }
+    div[data-testid="stSidebar"] [data-baseweb="select"] > div,
+    div[data-testid="stSidebar"] [data-baseweb="input"] > div {
+        background-color: #ffffff;
+    }
+    div[data-testid="stSidebar"] .stRadio label {
+        color: #111827 !important;
+    }
+    .stApp {
+        background-color: #ffffff;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -197,8 +212,7 @@ def load_and_clean_data():
     
     # Record raw stats for data quality reporting
     raw_stats = {
-        "total_rows": len(raw_df),
-        "total_columns": len(raw_df.columns),
+        "total_rows": len(raw_df),        "total_columns": len(raw_df.columns),
         "columns": list(raw_df.columns),
         "missing_values": raw_df.isnull().sum().to_dict(),
         "duplicate_rows": int(raw_df.duplicated().sum()),
@@ -399,7 +413,6 @@ def render_kpi_card(label, value, card_class="kpi-card"):
     </div>
     """
 
-
 # ============================================================
 # MAIN APPLICATION
 # ============================================================
@@ -597,8 +610,7 @@ def page_executive_overview(df, full_df, cols):
             xaxis_title="Month",
             yaxis_title="Quantity",
             height=350
-        )
-        st.plotly_chart(fig_qty, use_container_width=True)
+        )        st.plotly_chart(fig_qty, use_container_width=True)
     
     # Revenue Growth
     st.markdown('<div class="sub-header">📊 Month-over-Month Revenue Growth</div>', unsafe_allow_html=True)
@@ -797,8 +809,7 @@ def page_sales_product(df, cols):
             color_discrete_sequence=["#4361ee"],
             template="plotly_white"
         )
-        fig_topq.update_layout(
-            height=450,
+        fig_topq.update_layout(            height=450,
             yaxis=dict(autorange="reversed"),
             yaxis_title=""
         )
@@ -997,8 +1008,7 @@ def page_customer_risk(df, full_df, cols):
         col1, col2 = st.columns(2)
         
         with col1:
-            fig_lorenz = go.Figure()
-            fig_lorenz.add_trace(go.Scatter(
+            fig_lorenz = go.Figure()            fig_lorenz.add_trace(go.Scatter(
                 x=customer_revenue_sorted["Customer_Rank_Pct"],
                 y=customer_revenue_sorted["Cumulative_Pct"],
                 mode="lines",
@@ -1197,8 +1207,7 @@ def page_opportunities(df, cols):
         if len(intl) > 0:
             fig_intl = px.bar(
                 intl,
-                x="Revenue",
-                y="Country",
+                x="Revenue",                y="Country",
                 orientation="h",
                 title="Top 10 International Markets by Revenue",
                 color="Revenue",
@@ -1397,8 +1406,7 @@ def page_recommended_actions(df, full_df, cols):
         text="Action",
         color="Type",
         title="Action Priority Matrix (Impact vs Urgency)",
-        template="plotly_white",
-        color_discrete_map={"OPPORTUNITY": "#2d6a4f", "RISK": "#e63946"},
+        template="plotly_white",        color_discrete_map={"OPPORTUNITY": "#2d6a4f", "RISK": "#e63946"},
         size_max=20
     )
     fig_priority.update_traces(textposition="top center", marker=dict(size=15))
@@ -1597,8 +1605,7 @@ def page_data_quality(df, raw_stats, cols):
         | **Duplicate Rows (Raw)** | {raw_stats['duplicate_rows']:,} |
         | **Rows Removed** | {raw_stats['total_rows'] - raw_stats.get('cleaned_rows', raw_stats['total_rows']):,} |
         | **Cleaning Ratio** | {raw_stats.get('cleaned_rows', 0) / raw_stats['total_rows'] * 100:.1f}% retained |
-        """)
-    
+        """)    
     # Missing Values
     st.markdown('<div class="sub-header">❓ Missing Values (Raw Data)</div>', unsafe_allow_html=True)
     
