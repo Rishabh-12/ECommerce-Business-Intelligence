@@ -192,6 +192,8 @@ The repository was reviewed against the internship submission requirements:
 
 The application is designed to calculate cleaning counts and business findings at runtime rather than presenting fabricated fixed values.
 
+The submitted project report includes screenshots of the locally running dashboard UI.
+
 ## Limitations
 
 - The dataset is historical rather than current market data.
